@@ -1,4 +1,4 @@
-import {calculator, rest, sum} from "./tasks"
+import {addFriends, calculator, rest, students, StudentType, sum} from "./tasks"
 
 // test('sum of two numbers', () => {
 //     // 1. Тестовые данные
@@ -28,16 +28,20 @@ test('calculator', () => {
     expect(calculator(2, 3, {type: 'sub'})).toBe(-1)
 })
 
-export type StudentType = {
-    name: string
-    isStudent: boolean
-    friends: Array<string>
-}
+
+test('friends of students', () => {
+    const resStudents: StudentType[] = addFriends(students)
+    for (let i = 0; i < resStudents.length; i++) {
+        expect(resStudents[i].friends?.length).toBe(students.length - 1)
+        const friends: any = resStudents[i].friends
+        for (let j = 0; j < friends.length; j++) {
+            expect(friends[j] === resStudents[i].name).toBe(false)
+
+        }
+    }
+})
 
 
-export const addFriends = (students:Array<StudentType>):Array<StudentType> => {
-    return students.map(st => ({
-        ...st,
-        friends: students.map(st => st.name).filter(name => name !== st.name)
-    }))
-}
+
+
+
