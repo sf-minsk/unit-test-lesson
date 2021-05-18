@@ -29,19 +29,24 @@ test('calculator', () => {
 })
 
 
-test('friends of students', () => {
-    const resStudents: StudentType[] = addFriends(students)
-    for (let i = 0; i < resStudents.length; i++) {
-        expect(resStudents[i].friends?.length).toBe(students.length - 1)
-        const friends: any = resStudents[i].friends
-        for (let j = 0; j < friends.length; j++) {
-            expect(friends[j] === resStudents[i].name).toBe(false)
+// test('friends of students', () => {
+//     const resStudents: StudentType[] = addFriends(students)
+//     for (let i = 0; i < resStudents.length; i++) {
+//         expect(resStudents[i].friends?.length).toBe(students.length - 1)
+//         const friends: any = resStudents[i].friends
+//         for (let j = 0; j < friends.length; j++) {
+//             expect(friends[j] === resStudents[i].name).toBe(false)
+//
+//         }
+//     }
+// })
 
-        }
-    }
+describe('students', () => {
+    test('students should be have friends', () => {
+        expect(addFriends(students)[0]).toHaveProperty('friends', ['Alex', 'Nick', 'John', 'Helen', 'Ann'])
+        expect(addFriends(students)[0]).not.toHaveProperty('friends', ['Bob'])
+    })
 })
-
-
 
 
 
